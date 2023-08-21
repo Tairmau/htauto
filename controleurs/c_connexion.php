@@ -30,15 +30,20 @@ switch($action)
                 $count = $pdo->getVerifConnex($login,$mdp);
                 
                 $admin = $pdo->getVerifConnexAdmin($login,$mdp);
+
+
                 if($admin == 1){
                     $_SESSION['login'] = $login;
+                    $_SESSION['mdp'] = $mdp;
 
-                    header('Location: index.php?uc=admincrud');
+                    header('Location: index.php?uc=accueil&tri=allproducts');
 
                 }else{
                     if($count == 1){
                         $_SESSION['login'] = $login;
-                        header('Location: index.php?uc=accueil');
+                        $_SESSION['mdp'] = $mdp;
+
+                        header('Location: index.php?uc=accueil&tri=allproducts');
                         include('vues/v_accueil.php');
                         exit;
     
@@ -54,11 +59,17 @@ switch($action)
             {
                 //Detruire la session
                 session_destroy();
-                header('Location: index.php?uc=accueil');
+                header('Location: index.php?uc=accueil&tri=allproducts');
                 exit; 
 
             }
-
+        case'compteupdate':
+            {
+                $newpass = isset($_POST['newpass']) ? $_POST['newpass'] : '';
+                $login = $_SESSION['login'];
+                $pdo->updatepass($login,$newpass);
+                break;
+            }
     }
 
 
