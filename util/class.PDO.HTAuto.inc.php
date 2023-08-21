@@ -73,6 +73,21 @@ class PdoHtAuto
 		$count = $res->fetchcolumn();
 		return $count;
 	}
+	public function getrole($login)
+	{
+		$req="SELECT roleUser FROM connexion WHERE identifiant ='$login'";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+		
+		$role = $res->fetchcolumn();
+		return $role;
+	}
+	public function updatepass($login,$newpass)
+	{
+		$req="UPDATE connexion SET mdp = '$newpass' WHERE identifiant = '$login'";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+	}
 	public function getRegister($nom,$prenom,$login,$mdp)
 	{
 		$req1="INSERT INTO register(nom,prenom,identifiant,mdp) VALUES ('$nom','$prenom','$login','$mdp');";
@@ -85,42 +100,39 @@ class PdoHtAuto
 		$res2->execute();
 
 	}
+	public function getLesProduits($req)
+	{
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
 
-	public function getLesProduits()
-		{
-			$req="select * from produits";
+		$lesLignes = $res->fetchAll();
+		return $lesLignes; 
+	}
+
+	public function getajoutproduit($image,$modele,$type,$annee,$etat,$prix)
+	{
+		$req="INSERT INTO produits(image,modele,type,annee,etat,prix) VALUES ('$image','$modele','$type','$annee','$etat','$prix');";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+
+	}
+
+	public function supprimerProduit($id)
+        {
+            $req = "delete from produits where id = $id";
 			$res= PdoHtAuto::$monPdo->prepare($req);
 			$res->execute();
-
-			$lesLignes = $res->fetchAll();
-			return $lesLignes; 
-		}
-
-
-
-
-		public function supprimerProduit($unIdProduit)
-        {
-            $req = "delete from produits where id = $unIdProduit";
-			//var_dump($req);
-			PdoHtAuto::$monPdo->exec($req);
         }
-        public function nouveauProduit($image, $modele, $marque, $description, $prix)
+    public function modifProduit($updates,$id)
         {
-			//include("vues/v_ajoutervoitures.php");
-			
-
-			$req = "INSERT INTO produits (image, modele, marque, description, prix)
-        	VALUES ('$image', '$modele', '$marque', '$description', '$prix')";
-			
-			PdoHtAuto::$monPdo->exec($req);
+			$res= PdoHtAuto::$monPdo->prepare($updates);
+			$res->execute();
         }
-        public function modifProduit($description, $prix, $image, $type)
+	public function addEmail($email,$login)
         {
-            /*A Compléter*/
+			$req="UPDATE connexion SET email = '$email' WHERE identifiant = '$login';";
+			$res= PdoHtAuto::$monPdo->prepare($req);
+			$res->execute();
         }
-
-
-
 }
 ?>

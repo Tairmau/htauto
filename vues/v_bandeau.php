@@ -3,22 +3,31 @@
 	<nav>
 		<ul class="bandeau">
 			<?php 
-				if(isset($_SESSION['login'])){?>
-					<li><a href="index.php?uc=accueil" class='panier'><img src="images/panier" alt=""></a></li>
-					<li><a href="index.php?uc=accueil"> Accueil </a></li>
-					<li><a href="index.php?uc=accueil" class='user'><img src="images/utilisateur" alt=""></a></li>
-					<li><a href="index.php?uc=connexion&action=deconnexion" class='deconnexion'>DECONNEXION</a></li>
+				require_once("util/class.PDO.HTAuto.inc.php");
 
-					
+				$pdo=PdoHtAuto::getPdoHtAuto();
+
+				if(isset($_SESSION['login'])){
+					$login = $_SESSION['login'];
+
+					$userRole = $pdo->getrole($login); 
+					?>
+					<li><a href="index.php?uc=accueil&tri=allproducts"> Accueil </a></li>
+					<li><a href="index.php?uc=accountinfo" class='user'><img src="images/utilisateurco" alt=""></a></li>
+					<?php  
+						if($userRole == 'Admin')
+							{ ?>
+							<h1 class="admincrudlink"><a href="index.php?uc=admincrud&tri=allproducts" >admincrud</a></h1>
+				    <?php
+							}
+					?>
 					<li><h1>Henry THIBERT Automobiles</h1></li>
 			<?php 
 				}
 				else{ 
-
 					?>
-
 					<li><a href="index.php?uc=connexion" class='user'><img src="images/utilisateur" alt=""></a></li>
-					<li><a href="index.php?uc=accueil"> Accueil </a></li>
+					<li><a href="index.php?uc=accueil&tri=allproducts"> Accueil </a></li>
 					<li><h1>Henry THIBERT Automobiles</h1></li>
 			<?php
 				}
