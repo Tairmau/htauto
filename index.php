@@ -18,6 +18,7 @@ switch($uc)
 	case 'accueil':
 		{
 			include('vues/v_accueil.php');
+			include('vues/v_tri.php');
 			include('vues/v_lesvoitures.php');
 
 
@@ -37,11 +38,41 @@ switch($uc)
 
 			break;
 		}
+
 	case 'admincrud':
 		{
 			include('vues/v_ajoutproduit.php');
+			include('controleurs/c_gestionProduits.php');
+			include('vues/v_admincrud.php');
+			break;
 		}
+	case 'admincrudreservation':
+		{
+			include('controleurs/c_gestionProduits.php');
+			include('vues/v_admincrudreservation.php');
+			break;
+		}
+	case'accountinfo':
+		{
+			include('controleurs/c_connexion.php');
+			include('vues/v_compte.php');
+			break;
 
+		}
+    case'reservation':
+		{
+			include('controleurs/c_sendmail.php');
+			include('vues/v_recapcommande.php');
+			include('vues/v_avantlenvoie.php');
+			break;
+
+		}
+	case'merci':
+		{
+			include('controleurs/c_gotoadmincrud.php');
+			break;
+
+		}
 }
 include("vues/v_pied.php") ;
 

@@ -77,6 +77,7 @@ nav li .deconnexion{
   width: 500px;
   height: 50px;
   border: 2px #0C689C solid;
+  padding-left: 30px;
 }
 .container form button{
   width: 100px;
@@ -175,9 +176,13 @@ nav li .deconnexion{
   font-size: 40px;
   color: white;
   font-weight: 900;
+  cursor: pointer;
+}
+.voiture button a{
+  text-decoration: none;
+  color: white;
   -webkit-text-stroke: 1.7px;
   -webkit-text-stroke-color: rgb(0, 0, 0);
-  cursor: pointer;
 }
 .voiture .right h1:nth-child(1){
   margin-left: 50px;
@@ -211,3 +216,407 @@ nav li .deconnexion{
   margin-top: 100px;
   height: 100px;
 }
+.ajoutproduit{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+.ajoutproduit input{
+  margin-right: 50px;
+  width: 200px;
+  height: 50px;
+  padding-left: 20px;
+  border: 1px solid black;
+  font-size: 20px;
+}
+.ajoutproduit .file{
+  display: none;
+}
+.ajoutproduit img{
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  margin-top: -40px;
+  cursor: pointer;
+}
+.ajoutproduit label{
+  margin-right: 150px;
+
+}
+.ajoutproduit label p{
+  position: absolute;
+  margin-top: 35px;
+  margin-left: -40px;
+}
+.ajoutproduit button{
+  width: 200px;
+  height: 50px;
+  background-color: #579FF3;
+  border: 1px solid black;
+  font-size: 20px;
+  color: white;
+  font-weight: 900;
+}
+.admincrud{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.admincrud table{
+  border-collapse: collapse;
+  border: 1px solid black;
+  width: 900px;
+  min-height: 100px;
+}
+.admincrud thead tr {
+  background-color: #579FF3;
+  color: white;
+  height: 50px;
+  text-align: center;
+}
+.admincrud tbody th{
+  border-bottom: 1px solid black;
+
+}
+.admincrud .action{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  padding-left: -300px;
+
+}
+.admincrud .action img{
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.modifier img{
+  margin-left: 0px;
+  margin-top: -50px;
+}
+.modifier form{
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+}
+.modifier form input{
+  margin-bottom: 20px;
+  width: 300px;
+}
+.modifier form button{
+  margin-bottom: 20px;
+  width: 300px;
+}
+.modifier label{
+  margin-left: 100px;
+  margin-bottom: 70px;
+}
+.admincrudlink{
+  margin-top: 40px;
+  margin-left: -600px;
+}
+.admincrudlink a{
+  color: white;
+  font-size: 30px;
+  text-decoration: none;
+}
+.admincrudreservation{
+  margin-top: 40px;
+  margin-left: -400px;
+  position:absolute;
+}
+.admincrudreservation a{
+  color: white;
+  font-size: 30px;
+  text-decoration: none;
+}
+
+.compte{
+  width: 600px;
+  height: 700px;
+  background-color: rgb(247, 245, 241);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  border-radius: 10px;
+  border: 2px solid #4D8EEE;
+}
+.compte form{
+  display: flex;
+  flex-direction: column;
+}
+.compte h1{
+  text-align: center;
+  font-size: 50px;
+  color:#4D8EEE;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.compte form input{
+  width: 500px;
+  height: 50px;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid #4D8EEE;
+  padding-left: 30px;
+  font-size: 20px;
+
+}
+.compte form label{
+  margin-left: 50px;
+  color:#4D8EEE;
+  font-weight: 900;
+}
+.compte form button{
+  width: 200px;
+  height: 50px;
+  background-color: #4D8EEE;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  font-weight: 900;
+  border: none;
+  margin-left: 350px;
+  border-radius: 7px;
+}
+.compte .edit{
+  width: 200px;
+  height: 50px;
+  background-color: #4D8EEE;
+  border: none;
+  margin-left: 50px;
+  border-radius: 7px;
+  margin-top: -50px;
+
+}
+.compte .edit a{
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  font-weight: 900;
+  text-decoration: none;
+}
+.compte .deconnexion{
+  position: absolute;
+  margin-top: 30px;
+  font-size: 20px;
+  margin-left: -10px;
+}
+.compte .deconnexion:hover{
+  color: rgb(145, 13, 13);
+  text-decoration: none;
+}
+.tri{
+  display: flex;
+  flex-direction: row;
+  margin-left: 600px;
+}
+.tri p{
+  font-size: 30px;
+}
+.tri a{
+  margin-left: 50px;
+  font-size: 20px;
+  border: 3px solid #000000;
+  padding: 10px;
+  text-decoration: none;
+  margin-top: -10px;
+  color: #000000;
+}
+.avantveille{
+  display: flex;
+  margin-top: -100px;
+  flex-direction: column;
+  align-items: center;
+}
+.avantveille form{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+}
+.avantveille form input{
+  width: 500px;
+  height: 50px;
+  padding-left: 30px;
+  font-size: 20px;
+  border: 1px solid #000000;
+
+}
+.avantveille form button{
+  width: 100px;
+  border: none;
+  background-color: #4D8EEE;
+  border: 1px solid #000000;
+  border-left: none;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.merci{
+  text-align: center;
+  margin-top: 200px;
+  font-size: 40px;
+}
+.merci p{
+  font-size: 20px;
+  margin-top: 100px;
+}
+.error-message{
+  color: red;margin-top: 10px;
+  margin-bottom: -20px;
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  /* Styles pour cette Media Queries */
+  .tri{
+    display: flex;
+    flex-direction: row;
+    margin-left: 150px;
+  }
+  .connexion{
+    width: 800px;
+    height: 600px;
+  }
+
+  .connexion form input{
+    width:700px;
+    height: 75px;
+    margin-bottom: 30px;
+    border: 1px solid black;
+    font-size: 20px;
+    padding-left: 20px;
+  }
+  .connexion form button{
+    width:400px;
+    height: 75px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    background-color: #579FF3;
+    border: 1px solid black;
+    font-size: 35px;
+    color: white;
+    font-weight: 900;
+    -webkit-text-stroke: 2px;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+  }
+  .connexion form a{
+    font-size: 20px;
+    color: #3167a5;
+    font-weight: 900;
+  }
+  .connexion .register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  .compte form input{
+    width: 800px;
+    height: 75px;
+  }
+
+  .compte form button{
+    width: 200px;
+    height: 50px;
+    margin-left: 650px;
+  }
+  .compte .edit{
+    width: 200px;
+    height: 50px;
+  }
+  .compte .deconnexion{
+    position: absolute;
+    margin-top: 30px;
+    font-size: 40px;
+    margin-left: 70px;
+  }
+  .compte .deconnexion:hover{
+    color: rgb(145, 13, 13);
+    text-decoration: none;
+  }
+  .compte{
+    width: 900px;
+    height: 1000px;
+    background-color: rgb(247, 245, 241);
+  }
+  nav li a{
+    color: white;
+    font-size: 20px;
+    margin-left: 110px;
+  
+  }
+  nav li .user{
+    margin-top: 20px;
+    margin-left: 50px;
+  
+  }
+  .admincrudlink{
+    margin-left: -250px;
+  }
+  .admincrudlink a{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+  }
+  .admincrudreservation{
+    margin-left: -90px;
+    position:absolute;
+  }
+  .admincrudreservation a{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+  }
+  .ajoutproduit form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 100px;
+  }
+  .ajoutproduit input{
+    margin-right: 0px;
+    width: 700px;
+    height: 75px;
+    margin-bottom: 50px;
+  }
+  .ajoutproduit button{
+    width: 700px;
+    height: 75px;
+  }
+  .ajoutproduit img{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    margin-top: -75px;
+    cursor: pointer;
+  }
+  .ajoutproduit label{
+    margin-left: 50px;
+    margin-bottom: 100px;
+  }
+  .modifier img{
+    margin-left: 0px;
+    margin-top: -50px;
+  }
+  .modifier form{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+  }
+  .modifier form input{
+    margin-bottom: 50px;
+    width: 700px;
+  }
+  .modifier form button{
+    margin-bottom: 20px;
+    width: 700px;
+  }
+  .modifier label{
+    margin-left: 110px;
+    margin-bottom: 70px;
+  }
+  }
