@@ -20,9 +20,18 @@ class PdoHtAuto
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=htAuto';   		
       	private static $user='root' ;    		
-      	private static $mdp='' ;	
+      	private static $mdp='' ;
+		
 		private static $monPdo;
 		private static $monPdoHtAuto = null;
+
+		//online version
+		/*
+		private static $serveur='mysql:host=avofouafrancis.mysql.db';
+		private static $bdd='dbname=avofouafrancis';   		
+		private static $user='avofouafrancis' ;    		
+		private static $mdp='DSfoijfhsd82sds' ;*/
+
 /**
  * Constructeur privé, crée l'instance de PDO qui sera sollicitée
  * pour toutes les méthodes de la classe
@@ -73,6 +82,21 @@ class PdoHtAuto
 		$count = $res->fetchcolumn();
 		return $count;
 	}
+	public function getrole($login)
+	{
+		$req="SELECT roleUser FROM connexion WHERE identifiant ='$login'";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+		
+		$role = $res->fetchcolumn();
+		return $role;
+	}
+	public function updatepass($login,$newpass)
+	{
+		$req="UPDATE connexion SET mdp = '$newpass' WHERE identifiant = '$login'";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+	}
 	public function getRegister($nom,$prenom,$login,$mdp)
 	{
 		$req1="INSERT INTO register(nom,prenom,identifiant,mdp) VALUES ('$nom','$prenom','$login','$mdp');";
@@ -85,42 +109,106 @@ class PdoHtAuto
 		$res2->execute();
 
 	}
-
 	public function getLesProduits()
-		{
-			$req="select * from produits";
+	{
+		$req="select * from produits";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+
+		$lesLignes = $res->fetchAll();
+		return $lesLignes; 
+	}
+
+	public function getLesPrixCroissant()
+	{
+		$req="SELECT * FROM `produits` ORDER BY prix ASC";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+
+		$lesLignes = $res->fetchAll();
+		return $lesLignes; 
+	}
+	public function getLesPrixPasCroissant()
+	{
+		$req="SELECT * FROM `produits` ORDER BY prix DESC";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+
+		$lesLignes = $res->fetchAll();
+		return $lesLignes; 
+	}
+	public function getLesProduitsBySearch($search)
+	{
+		$req = "SELECT * FROM produits WHERE UPPER(modele) LIKE '%$search%' OR UPPER(annee) LIKE '%$search%' OR UPPER(annee) LIKE '%$search%'";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+
+		$lesLignes = $res->fetchAll();
+		return $lesLignes; 
+	}
+
+	public function getLesProduitParAnnee()
+	{
+		$req="SELECT * FROM `produits` ORDER BY annee DESC";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+
+		$lesLignes = $res->fetchAll();
+		return $lesLignes; 
+	}
+	public function getMaReservation($id)
+	{
+        $req = "select * from produits where id = '$id'";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+
+		$lesLignes = $res->fetchAll();
+		return $lesLignes; 
+	}
+
+	public function getajoutproduit($image,$modele,$type,$annee,$etat,$prix)
+	{
+		$req="INSERT INTO produits(image,modele,type,annee,etat,prix) VALUES ('$image','$modele','$type','$annee','$etat','$prix');";
+		$res= PdoHtAuto::$monPdo->prepare($req);
+		$res->execute();
+
+	}
+
+	public function supprimerProduit($req)
+        {
+			$res= PdoHtAuto::$monPdo->prepare($req);
+			$res->execute();
+        }
+	public function getReservation()
+        {
+			$req="select * from reservation";
 			$res= PdoHtAuto::$monPdo->prepare($req);
 			$res->execute();
 
 			$lesLignes = $res->fetchAll();
-			return $lesLignes; 
-		}
-
-
-
-
-		public function supprimerProduit($unIdProduit)
-        {
-            $req = "delete from produits where id = $unIdProduit";
-			//var_dump($req);
-			PdoHtAuto::$monPdo->exec($req);
+			return $lesLignes;
         }
-        public function nouveauProduit($image, $modele, $marque, $description, $prix)
+	public function supprimerReservation($id,$email)
         {
-			//include("vues/v_ajoutervoitures.php");
-			
-
-			$req = "INSERT INTO produits (image, modele, marque, description, prix)
-        	VALUES ('$image', '$modele', '$marque', '$description', '$prix')";
-			
-			PdoHtAuto::$monPdo->exec($req);
+			$req = "delete from reservation where idres = $id and email = '$email'";
+			$res= PdoHtAuto::$monPdo->prepare($req);
+			$res->execute();
         }
-        public function modifProduit($description, $prix, $image, $type)
+    public function modifProduit($updates,$id)
         {
-            /*A Compléter*/
+			$res= PdoHtAuto::$monPdo->prepare($updates);
+			$res->execute();
         }
+	public function addEmail($email,$login,$date,$heure,$modele,$type,$annee,$id_voiture)
+        {
+			$req1="UPDATE connexion SET email = '$email' WHERE identifiant = '$login';";
+			$res1= PdoHtAuto::$monPdo->prepare($req1);
+			$res1->execute();
 
-
-
+			$req2="INSERT INTO reservation(email,date,heure,modele,type,annee,idvoiture) VALUES ('$email','$date','$heure','$modele','$type','$annee','$id_voiture');";
+			$res2= PdoHtAuto::$monPdo->prepare($req2);
+			$res2->execute();
+        }
+	
 }
 ?>

@@ -17,7 +17,15 @@ switch($action)
                 $login = isset($_POST['login']) ? $_POST['login'] : '';
                 $mdp = isset($_POST['mdp']) ? $_POST['mdp'] : '';
 
-                $pdo->getRegister($nom,$prenom,$login,$mdp);
+
+                if(!empty($nom) && !empty($prenom) && !empty($login) && !empty($mdp)){
+                    $pdo->getRegister($nom,$prenom,$login,$mdp);
+                }else{
+
+                    $errormessage = 'veuillez remplir tout les champs';
+                    header('Location: index.php?uc=beforeconnexion&error=' . urlencode($errormessage));
+                    exit;
+                }  
 
                 break;
             }
@@ -30,23 +38,37 @@ switch($action)
                 $count = $pdo->getVerifConnex($login,$mdp);
                 
                 $admin = $pdo->getVerifConnexAdmin($login,$mdp);
-                if($admin == 1){
-                    $_SESSION['login'] = $login;
 
-                    header('Location: index.php?uc=admincrud');
+                if(!empty($login) && !empty($mdp)){
 
-                }else{
-                    if($count == 1){
+                    if($admin == 1){
                         $_SESSION['login'] = $login;
-                        header('Location: index.php?uc=accueil');
-                        include('vues/v_accueil.php');
-                        exit;
+                        $_SESSION['mdp'] = $mdp;
+    
+                        header('Location: index.php?uc=accueil&tri=allproducts');
     
                     }else{
-                        header('Location: index.php?uc=connexion');
-                        exit;
+                        if($count == 1){
+                            $_SESSION['login'] = $login;
+                            $_SESSION['mdp'] = $mdp;
+    
+                            header('Location: index.php?uc=accueil&tri=allproducts');
+                            include('vues/v_accueil.php');
+                            exit;
+        
+                        }else{
+                            header('Location: index.php?uc=connexion');
+                            exit;
+                        }
                     }
-                }
+                }else{
+
+                    $errormessage = 'veuillez remplir tout les champs';
+                    header('Location: index.php?uc=connexion&error=' . urlencode($errormessage));
+                    exit;
+                }  
+
+
 
                 break;
             }
@@ -54,11 +76,17 @@ switch($action)
             {
                 //Detruire la session
                 session_destroy();
-                header('Location: index.php?uc=accueil');
+                header('Location: index.php?uc=accueil&tri=allproducts');
                 exit; 
 
             }
-
+        case'compteupdate':
+            {
+                $newpass = isset($_POST['newpass']) ? $_POST['newpass'] : '';
+                $login = $_SESSION['login'];
+                $pdo->updatepass($login,$newpass);
+                break;
+            }
     }
 
 
